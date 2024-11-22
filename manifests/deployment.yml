@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: vuex-todo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vuex-todo
+  template:
+    metadata:
+      labels:
+        app: vuex-todo
+    spec:
+      containers:
+        - name: frontend
+          image: registry.gitlab.com/nrglv.rmn/frontendops
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
